@@ -2,3 +2,19 @@ language: java
 script: "mvn clean test -Dninja.mode=test"
 notifications:
   email: sk@svenkubiak.com
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "DWm8EoulPYHOLQDgl1uREPgwQgRAU1ywYORbhD07hxz3eae8r/Ah/Cz4VjRTlfS7RnMDUFs4vYeokFexCupw221wbvKVf9TrZslufJvK78qjb9DLdzbQ9NQsOR1LB1rbAjW9N1L+p+5fBx3ZwFD2GcFowLKDKTRhe6qEOsT00xo="
+
+addons:
+  coverity_scan:
+    project:
+      name: "svenkubiak/Rudeltippen"
+      description: "Build submitted via Travis CI"
+    notification_email: sk@svenkubiak.com
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: coverity_scan
